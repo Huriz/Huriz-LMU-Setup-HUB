@@ -130,7 +130,13 @@ app.post('/api/pull', async (req, res) => {
 
   const errors = results.filter(Boolean)
 
-  res.json({ ok: true, sessionId: key, createdAt, changed: changed.length, errors: errors.length ? errors : undefined })
+  const changes = changed.map(([key_param, val]) => ({
+    key: key_param,
+    from: currentValues[key_param]?.value ?? '—',
+    to: val.value,
+  }))
+
+  res.json({ ok: true, sessionId: key, createdAt, changed: changed.length, changes, errors: errors.length ? errors : undefined })
 })
 
 // ── Healthcheck ───────────────────────────────────────────────────────────────
