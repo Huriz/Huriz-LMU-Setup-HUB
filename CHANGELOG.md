@@ -4,24 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [v1.0.6] - 2026-05-03
-
-### Docs
-- README rewritten: Node.js removed from requirements (auto-installed by launcher)
-- First run must be as Administrator — installs Node via `winget` and adds Windows Firewall inbound rule for LAN access
-- Subsequent runs do not require Administrator
-- Firewall section clarifies the rule only allows local network access, not internet
-- TTL corrected to 172800 (48 h) in the config example
-
----
-
 ## [v1.0.5] - 2026-05-03
+
+### Frontend
+- Button label renamed from **CHANGES DONE** to **◈ CHANGES APPLIED** in both production UI and demo
 
 ### Demo
 - `demo-ui.html` synced with production UI: arrow between phone mockups restored, **◈ CHANGES APPLIED** button added to phone B, changes modal inside phone B with before/after diff, unused CSS removed
 
-### Frontend
-- Button label renamed from **CHANGES DONE** to **◈ CHANGES APPLIED** in both production UI and demo
+### Docs
+- README rewritten: Node.js removed from requirements (auto-installed by launcher on first run)
+- First run must be executed as Administrator — installs Node via `winget` and adds a Windows Firewall inbound rule for LAN access (not internet)
+- Subsequent runs do not require Administrator
+- TTL corrected to 172800 (48 h) in the config example
 
 ---
 
