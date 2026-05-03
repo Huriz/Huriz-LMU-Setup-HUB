@@ -3,9 +3,28 @@ import Redis from 'ioredis'
 import fetch from 'node-fetch'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
+import { execSync } from 'child_process'
 import dotenv from 'dotenv'
 
 dotenv.config({ path: './server.cfg' })
+
+function ensureFirewallRule(port) {
+  try {
+    const rulePort = execSync(
+      `powershell -Command "Get-NetFirewallRule -DisplayName 'LMU Setup HUB' -ErrorAction SilentlyContinue | Get-NetFirewallPortFilter | Select-Object -ExpandProperty LocalPort"`,
+      { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
+    ).trim()
+    if (rulePort === String(port)) return
+    // Rule missing or points to a different port — create/update
+    execSync(
+      `powershell -Command "Remove-NetFirewallRule -DisplayName 'LMU Setup HUB' -ErrorAction SilentlyContinue; New-NetFirewallRule -DisplayName 'LMU Setup HUB' -Direction Inbound -Protocol TCP -LocalPort ${port} -Action Allow"`,
+      { encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] }
+    )
+    console.log(`Firewall rule set for port ${port}.`)
+  } catch {
+    console.warn(`[warn] Could not configure firewall. Run as administrator once to allow LAN access on port ${port}.`)
+  }
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const app = express()
@@ -49,16 +68,8 @@ app.post('/api/push', async (req, res) => {
     return res.status(502).json({ error: `Could not read LMU setup: ${err.message}` })
   }
 
-  // Read metadata (car/circuit)
-  let summary = {}
-  try {
-    const sumRes = await fetch(`${LMU_URL}/rest/garage/summary`)
-    if (sumRes.ok) summary = await sumRes.json()
-  } catch (_) {}
-
   const payload = {
     setupJson,
-    summary,
     sessionName: key,
     createdAt: new Date().toISOString(),
   }
@@ -83,7 +94,7 @@ app.post('/api/pull', async (req, res) => {
     return res.status(404).json({ error: `Session "${key}" not found or expired.` })
   }
 
-  const { setupJson, summary, createdAt } = JSON.parse(raw)
+  const { setupJson, createdAt } = JSON.parse(raw)
 
   // Send each garage value individually to LMU
   const garageValues = setupJson?.carSetup?.garageValues
@@ -119,7 +130,7 @@ app.post('/api/pull', async (req, res) => {
 
   const errors = results.filter(Boolean)
 
-  res.json({ ok: true, sessionId: key, summary, createdAt, changed: changed.length, errors: errors.length ? errors : undefined })
+  res.json({ ok: true, sessionId: key, createdAt, changed: changed.length, errors: errors.length ? errors : undefined })
 })
 
 // ── Healthcheck ───────────────────────────────────────────────────────────────
@@ -146,6 +157,7 @@ app.get('/api/health', async (req, res) => {
 })
 
 const PORT = process.env.PORT || 8080
+ensureFirewallRule(PORT)
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`LMU Setup Sharing running on http://0.0.0.0:${PORT}`)
   console.log(`Pointing to LMU at ${LMU_URL}`)

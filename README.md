@@ -26,6 +26,7 @@ Types a name → SEND ───────────────► SET key �
 - Le Mans Ultimate running on the same PC (must be in the garage for the API to work)
 - A free [Upstash](https://upstash.com) Redis database
 - **WiFi or LAN connection** — the phone/tablet used as the UI must be on the same local network as the PC running the server
+- **Windows Firewall** — on first run the server will attempt to add an inbound rule automatically (requires Administrator). If it can't, you'll see a warning in the console and LAN access will be blocked until you add the rule manually (see below).
 
 ## Setup
 
@@ -72,6 +73,22 @@ node index.js
 - Session names: max 10 characters, letters and numbers only
 - Sessions expire after 1 hour
 - LMU must be open **in the garage** — the API is not active in menus
+
+## Windows Firewall
+
+On first run the server tries to create an inbound TCP rule named **"LMU Setup HUB"** for the configured port. This is needed so your phone or tablet can reach the server over LAN.
+
+> **The process must run as Administrator** for the rule to be created automatically. If it isn't, you'll see:
+> ```
+> [warn] Could not configure firewall. Run as administrator once to allow LAN access on port 8080.
+> ```
+> To add the rule manually, open PowerShell as Administrator and run:
+> ```powershell
+> New-NetFirewallRule -DisplayName "LMU Setup HUB" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
+> ```
+> Replace `8080` with the port set in your `server.cfg` if you changed it.
+
+The server still works on `localhost` without the rule — only LAN access (phone/tablet) is affected.
 
 ## Accessing from another device (phone, tablet)
 

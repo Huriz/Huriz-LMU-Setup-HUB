@@ -1,5 +1,6 @@
 webserver/backend/node_modules/
 webserver/backend/.env
 webserver/backend/package-lock.json
+webserver/backend/server.cfg_*
 .claude/
 CLAUDE.md
