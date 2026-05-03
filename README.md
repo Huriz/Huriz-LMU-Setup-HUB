@@ -70,8 +70,10 @@ node index.js
 | Share your setup | Driver sending | Open UI → type a name → tap **SEND** |
 | Load a setup | Driver receiving | Open UI → type same name → tap **RECEIVE** |
 
+After a successful **RECEIVE**, a **◈ CHANGES APPLIED** button appears showing how many setup values were modified. Tap it to see a before/after diff of every changed parameter.
+
 - Session names: max 10 characters, letters and numbers only
-- Sessions expire after 1 hour
+- Sessions expire after 48 hours
 - LMU must be open **in the garage** — the API is not active in menus
 
 ## Windows Firewall

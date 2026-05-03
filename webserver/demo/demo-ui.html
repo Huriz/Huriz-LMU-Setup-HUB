@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a0a0f">
 <title>LMU Setup HUB — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,7 +69,6 @@
     text-transform: uppercase;
   }
 
-  /* Phone frame */
   .phone {
     width: 320px;
     background: #111118;
@@ -101,13 +101,11 @@
     position: relative;
   }
 
-  /* Screen content */
   .screen {
     padding: 44px 20px 28px;
     min-height: 560px;
   }
 
-  /* Background grid inside screen */
   .screen::before {
     content: '';
     position: absolute;
@@ -120,7 +118,6 @@
 
   .screen > * { position: relative; z-index: 1; }
 
-  /* Glow */
   .screen::after {
     content: '';
     position: absolute;
@@ -133,7 +130,6 @@
     pointer-events: none;
   }
 
-  /* Header */
   .logo-sub {
     font-family: 'DM Mono', monospace;
     font-size: 9px;
@@ -260,11 +256,6 @@
     box-shadow: 0 0 0 2px rgba(227,0,34,0.1);
   }
 
-  .input-mock.focused-pull {
-    border-color: #0088cc;
-    box-shadow: 0 0 0 2px rgba(0,136,204,0.1);
-  }
-
   .input-text {
     font-family: 'Orbitron', monospace;
     font-size: 16px;
@@ -272,8 +263,6 @@
     color: #f0f0f8;
     letter-spacing: 0.05em;
   }
-
-  .input-text.placeholder { color: #2a2a3a; font-weight: 400; font-size: 13px; font-family: 'DM Mono', monospace; }
 
   .char-badge {
     font-size: 10px;
@@ -302,22 +291,17 @@
   .btn-pull-mock { background: #ffffff; color: #e30022; border: 2px solid #e30022; }
   .btn-pull-mock:hover { background: #ffe5e8; }
 
-  .info-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-top: 14px;
+  .btn-changes-mock {
+    background: #0088cc;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    font-size: 9px;
+    margin-bottom: 0;
+    display: none;
   }
 
-  .info-card {
-    background: #13131a;
-    border: 1px solid #2a2a3a;
-    border-radius: 8px;
-    padding: 10px 12px;
-  }
-
-  .info-card-label { font-size: 8px; letter-spacing: 0.2em; color: #6a6a8a; text-transform: uppercase; margin-bottom: 3px; }
-  .info-card-value { font-family: 'Orbitron', monospace; font-size: 10px; color: #f0f0f8; }
+  .btn-changes-mock:hover { background: #006faa; }
 
   /* Toast */
   .toast-mock {
@@ -360,6 +344,85 @@
     margin-top: 4px;
   }
 
+  /* Changes modal inside phone B */
+  .changes-modal-mock {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(4px);
+    z-index: 30;
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+    border-radius: 30px;
+  }
+
+  .changes-modal-mock.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .changes-inner {
+    background: #13131a;
+    border: 1px solid #2a2a3a;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .changes-modal-mock.show .changes-inner {
+    transform: translateY(0);
+  }
+
+  .changes-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid #2a2a3a;
+  }
+
+  .changes-modal-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: #f0f0f8;
+  }
+
+  .changes-modal-close {
+    color: #6a6a8a;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px 6px;
+    line-height: 1;
+  }
+
+  .changes-modal-body {
+    padding: 8px 16px 20px;
+  }
+
+  .change-row-mock {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 6px;
+    padding: 8px 0;
+    border-bottom: 1px solid #2a2a3a;
+    font-size: 9px;
+  }
+
+  .change-row-mock:last-child { border-bottom: none; }
+
+  .change-key-mock { color: #6a6a8a; letter-spacing: 0.05em; }
+  .change-vals { font-family: 'Orbitron', monospace; font-size: 8px; font-weight: 700; white-space: nowrap; text-align: right; }
+  .change-from { color: #ff3860; }
+  .change-arrow { color: #6a6a8a; margin: 0 3px; }
+  .change-to { color: #00cc77; }
+
   /* Arrow between phones */
   .arrow {
     display: flex;
@@ -368,7 +431,6 @@
     justify-content: center;
     gap: 8px;
     padding-top: 60px;
-    color: #6a6a8a;
     position: relative;
     z-index: 1;
   }
@@ -396,17 +458,6 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: #6a6a8a;
-    text-align: center;
-  }
-
-  .discord-badge {
-    background: rgba(88,101,242,0.15);
-    border: 1px solid rgba(88,101,242,0.3);
-    color: #8b95f8;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    padding: 5px 10px;
-    border-radius: 6px;
     text-align: center;
   }
 
@@ -492,7 +543,12 @@
     </div>
   </div>
 
-  
+  <!-- Arrow -->
+  <div class="arrow">
+    <div class="arrow-label">Redis</div>
+    <div class="arrow-line"></div>
+    <div class="arrow-label">Cloud</div>
+  </div>
 
   <!-- Phone B: receiving -->
   <div class="phone-wrap">
@@ -516,6 +572,7 @@
               <span class="char-badge" id="inputBCount">0/10</span>
             </div>
             <div class="btn-mock btn-pull-mock" id="btnB" onclick="demoReceive()">⬇ LOAD INTO LMU</div>
+            <div class="btn-mock btn-changes-mock" id="btnChangesB" onclick="showChangesMock()">◈ CHANGES APPLIED (5)</div>
             <div class="status-grid">
               <div class="status-card">
                 <div class="status-card-label">SetupHub</div>
@@ -533,8 +590,41 @@
           </div>
 
         </div>
+
+        <!-- Changes modal inside phone B -->
+        <div class="changes-modal-mock" id="changesMockModal" onclick="hideChangesMock()">
+          <div class="changes-inner" onclick="event.stopPropagation()">
+            <div class="changes-modal-header">
+              <div class="changes-modal-title">CHANGES APPLIED</div>
+              <div class="changes-modal-close" onclick="hideChangesMock()">✕</div>
+            </div>
+            <div class="changes-modal-body">
+              <div class="change-row-mock">
+                <div class="change-key-mock">Front Spring Rate</div>
+                <div class="change-vals"><span class="change-from">82</span><span class="change-arrow">→</span><span class="change-to">90</span></div>
+              </div>
+              <div class="change-row-mock">
+                <div class="change-key-mock">Rear Spring Rate</div>
+                <div class="change-vals"><span class="change-from">78</span><span class="change-arrow">→</span><span class="change-to">85</span></div>
+              </div>
+              <div class="change-row-mock">
+                <div class="change-key-mock">Front Ride Height</div>
+                <div class="change-vals"><span class="change-from">55</span><span class="change-arrow">→</span><span class="change-to">52</span></div>
+              </div>
+              <div class="change-row-mock">
+                <div class="change-key-mock">Rear Ride Height</div>
+                <div class="change-vals"><span class="change-from">60</span><span class="change-arrow">→</span><span class="change-to">57</span></div>
+              </div>
+              <div class="change-row-mock">
+                <div class="change-key-mock">Front Wing</div>
+                <div class="change-vals"><span class="change-from">4</span><span class="change-arrow">→</span><span class="change-to">6</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="toast-mock success" id="toastB">
-          ✓ Setup loaded into LMU
+          ✓ 5 values applied
           <div class="toast-id" id="toastBId"></div>
         </div>
       </div>
@@ -575,6 +665,14 @@
     document.getElementById(id).classList.toggle('show', show)
   }
 
+  function showChangesMock() {
+    document.getElementById('changesMockModal').classList.add('show')
+  }
+
+  function hideChangesMock() {
+    document.getElementById('changesMockModal').classList.remove('show')
+  }
+
   function demoSend() {
     resetDemo()
     typeText('inputAText', 'inputACount', NAME, '#e30022', () => {
@@ -597,6 +695,7 @@
           document.getElementById('toastBId').textContent = SESSION_ID
           showToast('toastB', true)
           document.getElementById('btnB').textContent = '⬇ LOAD INTO LMU'
+          document.getElementById('btnChangesB').style.display = 'block'
         }, 900)
       }, 300)
     })
@@ -609,7 +708,7 @@
         const t = document.getElementById('toastA')
         t.className = 'toast-mock error show'
         document.getElementById('toastAId').textContent = ''
-        document.getElementById('toastA').childNodes[0].textContent = '✕ Session "p2lmusetup" already in use. Try another name.'
+        t.childNodes[0].textContent = '✕ Session "p2lmusetup" already in use. Try another name.'
       }, 500)
     })
   }
@@ -617,6 +716,7 @@
   function resetDemo() {
     showToast('toastA', false)
     showToast('toastB', false)
+    hideChangesMock()
     document.getElementById('toastA').className = 'toast-mock success'
     document.getElementById('inputAText').innerHTML = '<span style="color:#e30022">█</span>'
     document.getElementById('inputBText').innerHTML = '<span style="color:#e30022">█</span>'
@@ -627,6 +727,7 @@
     document.getElementById('toastAId').textContent = ''
     document.getElementById('toastBId').textContent = ''
     document.getElementById('toastA').childNodes[0].textContent = '✓ Setup uploaded. Tell your friend:'
+    document.getElementById('btnChangesB').style.display = 'none'
   }
 
   function switchA() {

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v1.0.5] - 2026-05-03
+
+### Demo
+- `demo-ui.html` synced with production UI: arrow between phone mockups restored, **◈ CHANGES APPLIED** button added to phone B, changes modal inside phone B with before/after diff, unused CSS removed
+
+### Frontend
+- Button label renamed from **CHANGES DONE** to **◈ CHANGES APPLIED** in both production UI and demo
+
+---
+
 ## [v1.0.4] - 2026-05-03
 
 ### Backend
@@ -11,7 +21,7 @@ All notable changes to this project will be documented in this file.
 - `PULL` response now includes a `changes` array with `{ key, from, to }` for each value that was modified
 
 ### Frontend
-- After a successful RECEIVE, a **CHANGES DONE (N)** button appears below the action button
+- After a successful RECEIVE, a **◈ CHANGES APPLIED (N)** button appears below the action button
 - Tapping it opens a bottom-sheet modal listing every parameter that changed, showing the old value (red) and the new value (green)
 
 ---
