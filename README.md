@@ -22,18 +22,17 @@ Types a name → SEND ───────────────► SET key �
 
 ## Requirements
 
-- [Node.js](https://nodejs.org) 18+
 - Le Mans Ultimate running on the same PC (must be in the garage for the API to work)
 - A free [Upstash](https://upstash.com) Redis database
 - **WiFi or LAN connection** — the phone/tablet used as the UI must be on the same local network as the PC running the server
-- **Windows Firewall** — on first run the server will attempt to add an inbound rule automatically (requires Administrator). If it can't, you'll see a warning in the console and LAN access will be blocked until you add the rule manually (see below).
+
+> Node.js is installed automatically the first time you run the launcher. No manual installation needed.
 
 ## Setup
 
-**1. Clone the repo**
+**1. Download and extract** the latest release zip, or clone the repo:
 ```bash
 git clone https://github.com/Huriz/lmu-setup-hub.git
-cd lmu-setup-hub
 ```
 
 **2. Open `webserver/backend/server.cfg` and fill in your Upstash Redis URL**
@@ -42,7 +41,7 @@ cd lmu-setup-hub
 PORT=3001
 REDIS_URL=rediss://default:YOUR_TOKEN@YOUR_HOST.upstash.io:6379
 LMU_URL=http://localhost:6397
-TTL_SECONDS=3600
+TTL_SECONDS=172800
 ```
 
 | Parameter | Description |
@@ -50,18 +49,15 @@ TTL_SECONDS=3600
 | `PORT` | Port the web server listens on. Open `http://your-ip:<PORT>` in a browser or on your phone. |
 | `REDIS_URL` | Upstash Redis connection URL — contains your password, keep the file private. Get it at upstash.com → your database → **Connect** → **ioredis**. |
 | `LMU_URL` | Address of LMU's local API. Don't change this unless LMU moves to a different port. |
-| `TTL_SECONDS` | How long setups will stay alive in seconds. `3600` = 1 hour. |
+| `TTL_SECONDS` | How long setups stay available in seconds. `172800` = 48 hours. |
 
-**3. Run**
+**3. First run — right-click `start-lmu-setup-hub.bat` → Run as Administrator**
 
-Double-click `webserver/start-lmu-setup-hub.bat` — it installs dependencies, shows your addresses, and opens the browser.
+The first time only, Administrator is required to:
+- Install Node.js automatically via `winget` (if not already installed)
+- Add a Windows Firewall inbound rule so phones and tablets on your local network can reach the server
 
-Or manually:
-```bash
-cd webserver/backend
-npm install
-node index.js
-```
+After that first run, you can double-click the launcher normally — no Administrator needed.
 
 ## Usage
 
@@ -78,19 +74,15 @@ After a successful **RECEIVE**, a **◈ CHANGES APPLIED** button appears showing
 
 ## Windows Firewall
 
-On first run the server tries to create an inbound TCP rule named **"LMU Setup HUB"** for the configured port. This is needed so your phone or tablet can reach the server over LAN.
+The launcher adds an inbound TCP rule named **"LMU Setup HUB"** automatically on first run (requires Administrator). This rule allows devices on your **local network** (phone, tablet) to reach the server — it does not open any port to the internet.
 
-> **The process must run as Administrator** for the rule to be created automatically. If it isn't, you'll see:
-> ```
-> [warn] Could not configure firewall. Run as administrator once to allow LAN access on port 8080.
-> ```
-> To add the rule manually, open PowerShell as Administrator and run:
-> ```powershell
-> New-NetFirewallRule -DisplayName "LMU Setup HUB" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
-> ```
-> Replace `8080` with the port set in your `server.cfg` if you changed it.
+Once the rule exists, subsequent runs do not require Administrator.
 
-The server still works on `localhost` without the rule — only LAN access (phone/tablet) is affected.
+If you need to add the rule manually, open PowerShell as Administrator and run:
+```powershell
+New-NetFirewallRule -DisplayName "LMU Setup HUB" -Direction Inbound -Protocol TCP -LocalPort 3001 -Action Allow
+```
+Replace `3001` with the port set in your `server.cfg` if you changed it.
 
 ## Accessing from another device (phone, tablet)
 

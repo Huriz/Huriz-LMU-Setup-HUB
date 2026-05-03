@@ -1,6 +1,6 @@
 {
   "name": "lmu-setup-sharing",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Share LMU setups between drivers via Valkey",
   "type": "module",
   "main": "index.js",
