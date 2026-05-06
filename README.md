@@ -22,7 +22,7 @@ Types a name → SEND ───────────────► SET key �
 
 ## Requirements
 
-- Le Mans Ultimate running on the same PC (must be in the garage for the API to work)
+- Le Mans Ultimate open on the same PC, with the **Car Setup screen active inside an event**
 - A free [Upstash](https://upstash.com) Redis database
 - **WiFi or LAN connection** — the phone/tablet used as the UI must be on the same local network as the PC running the server
 
@@ -70,7 +70,11 @@ After a successful **RECEIVE**, a **◈ CHANGES APPLIED** button appears showing
 
 - Session names: max 10 characters, letters and numbers only
 - Sessions expire after 48 hours
-- LMU must be open **in the garage** — the API is not active in menus
+
+> [!IMPORTANT]
+> LMU must be open in the **Car Setup screen inside an event** (Practice, Qualifying or Race). The API is only active when you are in that screen — it will not work from the main menu or any other screen.
+>
+> **No setup files are created or modified.** Values are applied directly to LMU on the fly via its REST API.
 
 ## Windows Firewall
 
