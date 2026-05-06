@@ -38,7 +38,7 @@ git clone https://github.com/Huriz/lmu-setup-hub.git
 **2. Open `webserver/backend/server.cfg` and fill in your Upstash Redis URL**
 
 ```
-PORT=3001
+PORT=3000
 REDIS_URL=rediss://default:YOUR_TOKEN@YOUR_HOST.upstash.io:6379
 LMU_URL=http://localhost:6397
 TTL_SECONDS=172800
@@ -78,11 +78,6 @@ The launcher adds an inbound TCP rule named **"LMU Setup HUB"** automatically on
 
 Once the rule exists, subsequent runs do not require Administrator.
 
-If you need to add the rule manually, open PowerShell as Administrator and run:
-```powershell
-New-NetFirewallRule -DisplayName "LMU Setup HUB" -Direction Inbound -Protocol TCP -LocalPort 3001 -Action Allow
-```
-Replace `3001` with the port set in your `server.cfg` if you changed it.
 
 ## Accessing from another device (phone, tablet)
 
@@ -91,9 +86,9 @@ When you run `start-lmu-setup-hub.bat`, it prints the addresses you can use:
 ```
   LMU Setup HUB
   ================================
-  Local:   http://localhost:3001
-  Network: http://192.168.1.X:3001   ← open this on your phone
-  Host:    http://YOUR-PC-NAME:3001  ← alternative if DNS resolves
+  Local:   http://localhost:3000
+  Network: http://192.168.1.X:3000   ← open this on your phone
+  Host:    http://YOUR-PC-NAME:3000  ← alternative if DNS resolves
   ================================
 ```
 
