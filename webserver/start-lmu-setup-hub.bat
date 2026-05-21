@@ -41,6 +41,9 @@ echo  Network: http://%LOCAL_IP%:%PORT%
 echo  Host:    http://%COMPUTERNAME%:%PORT%
 echo  ================================
 echo.
+echo  * Open LMU Setup Hub on your mobile *
+node -e "require('qrcode-terminal').generate('http://%LOCAL_IP%:%PORT%', {small:true})"
+echo.
 start "" http://localhost:%PORT%
 node index.js
 pause

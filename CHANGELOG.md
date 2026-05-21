@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v1.0.8] - 2026-05-21
+
+### Launcher
+- QR code printed in the terminal after the URL block — scan with your phone to open LMU Setup Hub without typing the address
+- Added `qrcode-terminal` dependency
+
+---
+
 ## [v1.0.5] - 2026-05-03
 
 ### Frontend

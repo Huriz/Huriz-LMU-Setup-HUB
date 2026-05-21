@@ -41,7 +41,7 @@ git clone https://github.com/Huriz/lmu-setup-hub.git
 PORT=3000
 REDIS_URL=rediss://default:YOUR_TOKEN@YOUR_HOST.upstash.io:6379
 LMU_URL=http://localhost:6397
-TTL_SECONDS=172800
+TTL_SECONDS=3600
 ```
 
 | Parameter | Description |
@@ -49,7 +49,7 @@ TTL_SECONDS=172800
 | `PORT` | Port the web server listens on. Open `http://your-ip:<PORT>` in a browser or on your phone. |
 | `REDIS_URL` | Upstash Redis connection URL — contains your password, keep the file private. Get it at upstash.com → your database → **Connect** → **ioredis**. |
 | `LMU_URL` | Address of LMU's local API. Don't change this unless LMU moves to a different port. |
-| `TTL_SECONDS` | How long setups stay available in seconds. `172800` = 48 hours. |
+| `TTL_SECONDS` | How long setups stay available in seconds. `3600` = 1 hour. |
 
 **3. First run — right-click `start-lmu-setup-hub.bat` → Run as Administrator**
 
@@ -69,7 +69,7 @@ After that first run, you can double-click the launcher normally — no Administ
 After a successful **RECEIVE**, a **◈ CHANGES APPLIED** button appears showing how many setup values were modified. Tap it to see a before/after diff of every changed parameter.
 
 - Session names: max 10 characters, letters and numbers only
-- Sessions expire after 48 hours
+- Sessions expire after 1 hour
 
 > [!IMPORTANT]
 > LMU must be open in the **Car Setup screen inside an event** (Practice, Qualifying or Race). The API is only active when you are in that screen — it will not work from the main menu or any other screen.
@@ -85,7 +85,7 @@ Once the rule exists, subsequent runs do not require Administrator.
 
 ## Accessing from another device (phone, tablet)
 
-When you run `start-lmu-setup-hub.bat`, it prints the addresses you can use:
+When you run `start-lmu-setup-hub.bat`, it prints the addresses you can use and displays a QR code you can scan directly with your phone:
 
 ```
   LMU Setup HUB
@@ -94,6 +94,11 @@ When you run `start-lmu-setup-hub.bat`, it prints the addresses you can use:
   Network: http://192.168.1.X:3000   ← open this on your phone
   Host:    http://YOUR-PC-NAME:3000  ← alternative if DNS resolves
   ================================
+
+  * Open LMU Setup Hub on your mobile *
+
+  ▄▄▄▄▄▄▄ ▄  ▄ ▄▄▄▄▄▄▄
+  ...QR code...
 ```
 
 ## Tech stack
