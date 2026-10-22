@@ -25,6 +25,11 @@ and go to the garage.
 - **Redis:** server and token (token hidden with `*`); shared free database by default, or your own (link to Upstash)
 - English and Spanish
 
+### Phone page
+- Same look as the overlay: **LMU / REDIS / GARAGE** lights, red SEND / blue RECEIVE, green **CHANGES APPLIED**
+  list and the result in its own box
+- Read only outside the garage, Spanish / English following the plugin's language
+
 ### Sharing
 - **Same name all the time:** sending with an existing name overwrites it ("New setup created" / "Setup overwritten")
 - The name is kept after sending / receiving; clicking the field selects it so typing replaces it
