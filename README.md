@@ -7,8 +7,8 @@
 ## English
 
 **TL;DR:** A free **SimHub plugin** for **Le Mans Ultimate** to share car setups with your team mates in seconds.
-One driver sends the setup with a name, the other types the same name and the setup is applied to their game.
-No files, no Discord uploads.
+One driver sends the setup with a name, the other types the same name and the setup is **instantly applied**
+to their car. No files, no Discord uploads.
 
 **Download:** [Huriz - LMU Setup HUB](../../releases/latest) (v2.0.7)
 
@@ -27,7 +27,7 @@ No files, no Discord uploads.
 
 1. **Driver A**, in the garage, types a name (e.g. `p2lmu`) and presses **SEND**. The plugin reads the active setup
    from LMU and stores it for a while (1 hour by default) in an online Redis database.
-2. Driver A tells the name to **Driver B** (chat, Discord, voice…).
+2. Driver A tells the name (e.g. `p2lmu`) to **Driver B** (chat, Discord, voice…).
 3. **Driver B**, in the garage, types the same name and presses **LOAD INTO LMU**. Only the values that are different
    are sent to LMU. The **CHANGES APPLIED** button shows the list.
 
@@ -106,8 +106,8 @@ Versions **1.0.x** (May 2026) were a standalone Node.js server with a web page f
 ## Español
 
 **En resumen:** un **plugin de SimHub** gratuito para **Le Mans Ultimate** para compartir setups con tus compañeros en
-segundos. Un piloto envía su setup con un nombre, el otro escribe el mismo nombre y el setup se aplica en su juego.
-Sin archivos ni subidas a Discord.
+segundos. Un piloto envía su setup con un nombre, el otro escribe el mismo nombre y el setup se **aplica al instante** en
+su coche. Sin archivos ni subidas a Discord.
 
 **Descarga:** [Huriz - LMU Setup HUB](../../releases/latest) (v2.0.7)
 
@@ -126,7 +126,7 @@ Sin archivos ni subidas a Discord.
 
 1. El **piloto A**, en el garaje, escribe un nombre (p. ej. `p2lmu`) y pulsa **ENVIAR**. El plugin lee el setup activo
    de LMU y lo guarda un rato (1 hora de serie) en una base de datos Redis en internet.
-2. El piloto A le dice el nombre al **piloto B** (chat, Discord, voz…).
+2. El piloto A le dice el nombre (p. ej. `p2lmu`) al **piloto B** (chat, Discord, voz…).
 3. El **piloto B**, en el garaje, escribe el mismo nombre y pulsa **CARGAR EN LMU**. Solo se mandan a LMU los valores
    distintos. El botón **CAMBIOS APLICADOS** enseña la lista.
 
