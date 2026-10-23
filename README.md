@@ -10,7 +10,7 @@
 One driver sends the setup with a name, the other types the same name and the setup is **instantly applied**
 to their car. No files, no Discord uploads.
 
-**Download:** [Huriz - LMU Setup HUB](../../releases/latest) (v2.0.7)
+**Download:** [Huriz - LMU Setup HUB](../../releases/latest) (v2.0.8)
 
 ▶ [Installation video on YouTube](https://www.youtube.com/watch?v=Gj0C-dNAhBI)
 
@@ -109,7 +109,7 @@ Versions **1.0.x** (May 2026) were a standalone Node.js server with a web page f
 segundos. Un piloto envía su setup con un nombre, el otro escribe el mismo nombre y el setup se **aplica al instante** en
 su coche. Sin archivos ni subidas a Discord.
 
-**Descarga:** [Huriz - LMU Setup HUB](../../releases/latest) (v2.0.7)
+**Descarga:** [Huriz - LMU Setup HUB](../../releases/latest) (v2.0.8)
 
 ▶ [Vídeo de la instalación en YouTube](https://www.youtube.com/watch?v=Gj0C-dNAhBI)
 

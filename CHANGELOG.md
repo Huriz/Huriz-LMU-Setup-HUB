@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [v2.0.8] - 2026-10-23
+
+### Plugin
+- **New version notice:** the plugin checks GitHub for a newer version (at most once a day, only the version number, no data sent).
+  When there is one, a blue strip in the plugin tab offers **Download** or **Don't remind me about this version**
+- **Check for updates** button next to the version in the plugin tab
+
+### Phone page
+- **Full screen** button (top left, like F11) to hide the browser address bar (on iPhone: "Add to Home Screen")
+- CHANGES APPLIED opens as a sheet from the bottom over the page
+
+---
+
 ## [v2.0.7] - 2026-10-22
 
 **Huriz - LMU Setup HUB is now a SimHub plugin.** No more Node.js, launcher or `server.cfg`: install it, open SimHub
